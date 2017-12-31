@@ -76,6 +76,11 @@ if not os.path.isdir(screenshot_backup_dir):
 
 
 def pull_screenshot():
+    flag = os.system('adb shell screencap -p /sdcard/autojump.png')
+    if flag == 1:
+        print('请安装环境变量')
+        sys.exit()
+    os.system('adb pull /sdcard/autojump.png .')
     process = subprocess.Popen('adb shell screencap -p', shell=True, stdout=subprocess.PIPE)
     screenshot = process.stdout.read()
     if sys.platform == 'win32':
